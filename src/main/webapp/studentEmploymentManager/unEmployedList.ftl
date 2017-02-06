@@ -98,21 +98,21 @@
                                     data-method="prop">${(stu.credit)!"无"}
                                     <a id="xf${stu.id}" onclick="func.seeDetail('xf',${stu.id});" data-theme="学分信息"
                                        data-req="creditDetail"><img class="ho"
-                                                                    src="/images/seeDetail.png"></a>
+                                                                    src="${staticServePath}/images/seeDetail.png"></a>
                                 </td>
                                 <td id="testAverage${stu.id}"
                                     data-label="${(stu.testAverage)!0}" data-target="#testAverage"
                                     data-method="prop">${(stu.testAverage)!"无"}
                                     <a id="test${stu.id}" onclick="func.seeDetail('test',${stu.id});" data-theme="考试成绩"
                                        data-req="testDetail"><img class="ho"
-                                                                  src="/images/seeDetail.png"></a>
+                                                                  src="${staticServePath}/images/seeDetail.png"></a>
                                 </td>
                                 <td id="trainingEvaluation${stu.id}"
                                     data-label="${(stu.trainingEvaluation)!0}" data-target="#trainingEvaluation"
                                     data-method="prop">${(stu.trainingEvaluation)!"无"}
                                     <a id="train${stu.id}" onclick="func.seeDetail('train',${stu.id});"
                                        data-theme="项目评分" data-req="trainingProjectDetail"><img class="ho"
-                                                                                               src="/images/seeDetail.png"></a>
+                                                                                               src="${staticServePath}/images/seeDetail.png"></a>
                                 </td>
                                 <td id="situation${(stu.studentTrackInfo.situation)!}"
                                     data-label="${(stu.studentTrackInfoList.situation)!}" data-target="#situation"

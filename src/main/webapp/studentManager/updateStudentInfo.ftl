@@ -231,14 +231,14 @@
             <td colspan="2">
                 <div class="input-group input-group-sm">
                     <span class="input-group-addon">首次还款日期:</span>
-                    <span class="input-group-addon"><#if student.firstRepaymentTime??>${student.firstRepaymentTime}<#else>
+                    <span class="input-group-addon"><#if student.firstRepaymentTime??>${(student.firstRepaymentTime?number)?number_to_date}<#else>
                         未填写</#if></span>
                 </div>
             </td>
             <td colspan="2">
                 <div class="input-group input-group-sm">
                     <span class="input-group-addon">学生还款日期:</span>
-                    <span class="input-group-addon"><#if student.studentRepaymentTime??>${student.studentRepaymentTime}<#else>
+                    <span class="input-group-addon"><#if student.studentRepaymentTime??>${(student.studentRepaymentTime?number)?number_to_date}<#else>
                         未填写</#if></span>
                 </div>
             </td>

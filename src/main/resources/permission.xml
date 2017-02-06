@@ -89,6 +89,9 @@
                                 <mapping id="1017" icon="projectScore" title="项目评分" url="projectScore" function="0">
                                     <mappings/>
                                 </mapping>
+                                <mapping id="1018" icon="repeat" title="重修" url="repeat" function="0">
+                                    <mappings/>
+                                </mapping>
                             </mappings>
                         </mapping>
                     </mappings>

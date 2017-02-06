@@ -1,11 +1,13 @@
 package com.hudongwx.studentsys.service;
 
 import com.hudongwx.studentsys.common.Service;
+import com.hudongwx.studentsys.model.TestQuestionnaireClass;
 import com.hudongwx.studentsys.model.TestReply;
 import com.hudongwx.studentsys.util.Common;
 import com.jfinal.plugin.ehcache.CacheKit;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by wuhongxu on 2016/10/19 0019.
@@ -73,7 +75,12 @@ public class TestReplyService extends Service {
         List<TestReply> replyList = TestReply.dao.find(TestReply.SEARCH_FROM_TEST_REPLY + " where studentId = ?", stuId);
         if (replyList.isEmpty())
             return null;
-        return replyList;
+        return replyList.stream().map(testReply -> {
+            TestQuestionnaireClass questionnaireClass = tqcs.getById(testReply.getTestQuestionnaireClassId());
+            testReply.setTime(questionnaireClass.getTestQuestionnaireEndTime());
+            _updateTestReply(testReply);
+            return testReply;
+        }).collect(Collectors.toList());
     }
 
 }

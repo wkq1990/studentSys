@@ -2,8 +2,8 @@ package com.hudongwx.studentsys.service;
 
 import com.hudongwx.studentsys.common.Service;
 import com.hudongwx.studentsys.exceptions.ServiceException;
-import com.hudongwx.studentsys.model.*;
 import com.hudongwx.studentsys.model.Class;
+import com.hudongwx.studentsys.model.*;
 import com.hudongwx.studentsys.util.Common;
 import com.hudongwx.studentsys.util.PageinateKit;
 import com.hudongwx.studentsys.util.StrPlusKit;
@@ -192,7 +192,7 @@ public class StudentService extends Service {
                         for (int i = 0; i < testList.size(); i++) {
                             sum = sum.add(new BigDecimal(testList.get(i).getScore()));
                         }
-                        avg = sum.divide(new BigDecimal(testList.size()));
+                        avg = sum.divide(new BigDecimal(testList.size()),2,BigDecimal.ROUND_HALF_UP);
                         student.setTestAverage(avg);
                     }
                     List<TrainingProject> projectList = trainingProjectService.getProjectInfoByStudentId(student.getId());
@@ -202,7 +202,7 @@ public class StudentService extends Service {
                         for (int i = 0; i < projectList.size(); i++) {
                             sum = sum.add(projectList.get(i).getScore());
                         }
-                        avg = sum.divide(new BigDecimal(projectList.size()));
+                        avg = sum.divide(new BigDecimal(projectList.size()),2,BigDecimal.ROUND_HALF_UP);
                         student.setTrainingEvaluation(avg);
                     }
 

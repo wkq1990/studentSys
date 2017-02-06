@@ -41,6 +41,7 @@ public class UpAndDownLoadController extends BaseController {
             List<Student> students = ExcelUtil.paraExcel(file);
             System.out.println("students.size()---------->" + students.size());
             for (Student student : students) {
+                System.out.println("className---------->" + student.getClassName());
                 Class aClass = classService.getClassByClassName(student.getClassName());
                 if (aClass == null) {
                     classExits = false;
