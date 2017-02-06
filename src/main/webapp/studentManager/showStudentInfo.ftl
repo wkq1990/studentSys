@@ -148,13 +148,6 @@
                                                     /${InsertKit(btnLabel,"${student.id}")}
                                                 </#if>
                                             </#list>
-                                            <#list map["operators"+view.id] as op>
-                                                <#if op.url == "repeat">
-                                                    <@macroBtn url = op.url title = op.title></@macroBtn>
-                                                    <#assign op = map["operators"+view.id][0]>
-                                                    /${InsertKit(btnLabel,"${student.id}")}
-                                                </#if>
-                                            </#list>
                                         </td>
                                     </#if>
                                 </tr>

@@ -127,7 +127,7 @@ public class StudentService extends Service {
     public List<Student> getAllLoanStudentByClassId(Integer classId) {
         if (classId == null)
             return null;
-        List<Student> studentList = Student.dao.find(Student.SEARCH_FROM_STUDENT + "where classId = ? and status = ? and paymentMethod like ? and residualFrequency > 0", classId, Student.STATUS_STUDYING, "贷款");
+        List<Student> studentList = Student.dao.find(Student.SEARCH_FROM_STUDENT + "where classId = ? and status = ?  and residualFrequency > 0", classId, Student.STATUS_STUDYING);
         if (studentList.isEmpty())
             return null;
         return studentList;
@@ -136,7 +136,7 @@ public class StudentService extends Service {
     public List<Student> getLoanStudentByClassId(Integer classId) {
         if (classId == null)
             return null;
-        List<Student> studentList = Student.dao.find(Student.SEARCH_FROM_STUDENT + " where classId = ? and paymentMethod like ?", classId, "贷款");
+        List<Student> studentList = Student.dao.find(Student.SEARCH_FROM_STUDENT + " where classId = ? ", classId);
         if (studentList.isEmpty())
             return null;
         return studentList;
