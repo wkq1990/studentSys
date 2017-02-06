@@ -29,7 +29,7 @@ public class ClassService extends Service {
     }
 
     public Page<Class> getAllClass(Integer currentPage) {
-        return Class.dao.paginate(currentPage, Common.MAX_PAGE_SIZE, Common.COMMON_SELECT, Class.SQL_FROM);
+        return Class.dao.paginate(currentPage, Common.MAX_PAGE_SIZE, Common.COMMON_SELECT, Class.SQL_FROM+Class.ORDER_BY_CLASS_CREATE_TIME);
     }
 
     public List<Class> getClassByRegionId(int regionid) {

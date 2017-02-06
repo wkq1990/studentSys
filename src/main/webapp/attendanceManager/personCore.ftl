@@ -152,7 +152,7 @@
                                 </div>
                             </td>
                             <td>
-                                <a class="res" onclick="func.addAttendance('table-save')">保存</a>
+                                <a class="res" onclick="func.addAttendance('table-save','${student.id}')">保存</a>
                                 <a class="res" onclick="hideTr()">取消</a>
                             </td>
                         </tr>

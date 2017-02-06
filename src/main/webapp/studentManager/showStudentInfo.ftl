@@ -92,7 +92,7 @@
                                         <div class="checkbox3 checkbox-round text-center">
                                             <input class="idList" type="checkbox" data-clsId="${student.classId}"
                                                    data-status="${student.status}" data-label="${student.id}"
-                                                   id="index-look${student.id}" <#if student.status!=1>disabled</#if>>
+                                                   id="index-look${student.id}" <#if student.status!=1 && student.status!=3>disabled</#if>>
                                             <label class="checkbox-2" style="display: inline"
                                                    for="index-look${student.id}">
                                             </label>

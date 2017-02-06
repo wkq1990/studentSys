@@ -13,4 +13,5 @@ public class Class extends BaseClass<Class> {
     public static final Class dao = new Class();
     public static final String SEARCH_FROM_CLASS = "select * from stumanager_class ";
     public static final String SQL_FROM = " from stumanager_class ";
+    public static final String ORDER_BY_CLASS_CREATE_TIME = " order by classCreateTime desc ";
 }

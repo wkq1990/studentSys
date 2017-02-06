@@ -837,9 +837,17 @@ var func = {
             $('#core_time').val(new Date($('#core_time_temp').val().replace(/-/g, '/')).getTime());
             var json = {};
             $('#core_form').find('input,select').each(function () {
-                json[$(this).attr('name')] = $(this).val();
+                if($(this).attr('name')=="attendance.studentId"){
+                    json[$(this).attr('name')] = id;
+                }else if($(this).attr('name')=="attendance.studentId"){
+                    json[$(this).attr('name')] = id;
+                }else{
+                    json[$(this).attr('name')] = $(this).val();
+                }
             });
+            console.log(json);
             Util.ajax(Label.staticServePath + '/attendanceManager/postAttendance', {
+                data: json,
                 success: {
                     bindModal: $('#modal')
                 }

@@ -183,6 +183,7 @@ public class AttendanceController extends BaseController {
     @Before(POST.class)
     public void postAttendance() {
         Attendance model = getModel(Attendance.class);
+        model.setOperaterId(getCurrentUser(this).getId());
         Integer classId = classService.getClassByStudent(studentService.getStudentById(model.getStudentId())).getId();
         model.setClassId(classId);
         if (model.getId() == null) {

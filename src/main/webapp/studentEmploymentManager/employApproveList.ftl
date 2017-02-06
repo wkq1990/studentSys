@@ -91,9 +91,9 @@
                                 <td id="employmentTime${(se.id)!}"
                                     data-label="${(se.employmentTime)!0}" data-target="#employmentTime"
                                     data-method="prop">${((se.employmentTime?number)?number_to_date)!"无"}</td>
-                                <td id="operater${(se.id)!}"
-                                    data-label="${(se.operater)!0}" data-target="#operater"
-                                    data-method="prop">${(se.operater)!"无"}</td>
+                                <td id="operator${(se.id)!}"
+                                    data-label="${(se.operator)!0}" data-target="#operator"
+                                    data-method="prop">${(se.operator)!"无"}</td>
                                 <td id="remark${se.id}"
                                     data-label="${(se.remark)!}" data-target="#remark"
                                     data-method="prop">${(se.remark)!"无"}</td>
