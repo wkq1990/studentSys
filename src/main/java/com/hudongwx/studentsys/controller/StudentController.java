@@ -155,7 +155,7 @@ public class StudentController extends BaseController {
         Student student = studentService.getStudentById(studentId);
         Integer regionId = student.getRegionId();
         if (regionId == null) {
-            RenderKit.renderError(this);
+            RenderKit.renderError(this,"区域id不能为空");
             return;
         }
         List<Class> classList = classService.getClassByRegionId(regionId);

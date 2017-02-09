@@ -53,6 +53,7 @@ public class StudentUtil {
         stu.setOperater(user.getUserNickname());
         stu.setChecked(Student.STATUS_UN_CHECKED);
         stu.setCreateTime(admission);
+        stu.setIp(null == user.getUserLastLoginIp() ? "0.0.0.0" : user.getUserLastLoginIp());
         return stu;
     }
 
@@ -91,6 +92,7 @@ public class StudentUtil {
         stu.setOperater(user.getUserNickname());
         stu.setChecked(Student.STATUS_UN_CHECKED);
         stu.setCreateTime(admission);
+        stu.setIp(null == user.getUserLastLoginIp() ? "0.0.0.0" : user.getUserLastLoginIp());
         return stu;
     }
 
