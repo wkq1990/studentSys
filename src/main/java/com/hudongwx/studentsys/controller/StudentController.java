@@ -16,6 +16,7 @@ import com.jfinal.upload.UploadFile;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -83,18 +84,18 @@ public class StudentController extends BaseController {
         Student model = getModel(Student.class);
         Student student = StudentUtil.rebuildStudentModel(getCurrentUser(this), model, userService, classService, studentService);
         Student stu = studentService.getStudentByIdNumber(student.getIdNumber());
-        if(stu==null){
+        if (stu == null) {
             if (studentService._save(student)) {
-                StudentUtil.createAndSaveUserAccount(getCurrentUser(this),student,userService,roleService);
+                StudentUtil.createAndSaveUserAccount(getCurrentUser(this), student, userService, roleService);
                 Class aClass = classService.getClassById(student.getClassId());
                 aClass.setStudentCnt(studentService.getStuCntByClsId(student.getClassId()));
                 classService._updateClass(aClass);
-                RenderKit.renderSuccess(this,"学生信息添加成功！");
+                RenderKit.renderSuccess(this, "学生信息添加成功！");
                 return;
             }
-            RenderKit.renderError(this,"学生信息添加异常！");
-        }else{
-            RenderKit.renderError(this,"学生信息已存在！");
+            RenderKit.renderError(this, "学生信息添加异常！");
+        } else {
+            RenderKit.renderError(this, "学生信息已存在！");
         }
 
     }
@@ -155,7 +156,7 @@ public class StudentController extends BaseController {
         Student student = studentService.getStudentById(studentId);
         Integer regionId = student.getRegionId();
         if (regionId == null) {
-            RenderKit.renderError(this,"区域id不能为空");
+            RenderKit.renderError(this, "区域id不能为空");
             return;
         }
         List<Class> classList = classService.getClassByRegionId(regionId);
@@ -177,7 +178,34 @@ public class StudentController extends BaseController {
 //        }
 //        RenderKit.renderSuccess(this);
         Student student = ModelKit.injectList(Student.class, this, "list");
-        System.out.println(student.toString());
+        Student oldStudentInfo = studentService.getStudentById(student.getId());
+        if (null != student.getClassId()) {
+            Class newClass = classService.getClassById(student.getClassId());
+            Class oldClass = classService.getClassById(oldStudentInfo.getClassId());
+            newClass.setStudentCnt(newClass.getStudentCnt() + 1);
+            int cnt = oldClass.getStudentCnt() - 1;
+            oldClass.setStudentCnt(cnt < 0 ? 0 : cnt);
+            classService._updateClass(newClass);
+            classService._updateClass(oldClass);
+        }
+
+        if (null != student.getResidualFrequency()) {
+            BigDecimal subsidy = oldStudentInfo.getSubsidy();
+            //设置补助剩余金额
+            if (null == subsidy || subsidy.intValue() == 0 || oldStudentInfo.getPaymentMethod().equals("现金")) {
+                //说明是非贷款的学生,将补助剩余今个设为0
+                student.setResidualSubsidyAmount(new BigDecimal(0));
+            } else {
+                //贷款的学生上传数据的出的剩余补助金额
+                BigDecimal rsa = oldStudentInfo.getSubsidyPer().multiply(new BigDecimal(student.getResidualFrequency()));
+                //剩余总额超过总额预处理
+                if (rsa.doubleValue() > oldStudentInfo.getSubsidy().doubleValue()) {
+                    rsa = oldStudentInfo.getSubsidy();
+                    student.setResidualFrequency(oldStudentInfo.getSubsidy().divide(oldStudentInfo.getSubsidyPer(), 0, BigDecimal.ROUND_HALF_DOWN).intValue());
+                }
+                student.setResidualSubsidyAmount(rsa);
+            }
+        }
         studentService._updateStudentById(student);
         RenderKit.renderSuccess(this);
     }

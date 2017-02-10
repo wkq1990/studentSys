@@ -97,13 +97,19 @@ public class StudentUtil {
     }
 
     private static void dealSubsidyInfo(Student stu) {
-        if ((stu.getResidualSubsidyAmount() != null && stu.getResidualFrequency() != null) && stu.getPaymentMethod().equals("贷款")) {
-            BigDecimal rf = new BigDecimal(stu.getResidualFrequency());
-            if (rf == null || rf.intValue() == 0)
+        //补助剩余金额
+        BigDecimal rsa = stu.getResidualSubsidyAmount() != null ? stu.getResidualSubsidyAmount() : new BigDecimal(0);
+        if (rsa.doubleValue() > 0 && stu.getPaymentMethod().equals("贷款")) {
+            //补助剩余次数
+            BigDecimal rf = stu.getResidualFrequency() != null ? new BigDecimal(stu.getResidualFrequency()) : new BigDecimal(0);
+            if (rf.intValue() == 0)
                 rf = new BigDecimal(1);
-            BigDecimal subsidyPer = stu.getResidualSubsidyAmount().divide((rf), 2, RoundingMode.HALF_DOWN);
+            BigDecimal subsidyPer = rsa.divide(rf, 2, RoundingMode.HALF_DOWN);
             stu.setSubsidyPer(subsidyPer);
             stu.setSubsidy(stu.getSubsidyPer().multiply(rf));
+        } else {
+            stu.setSubsidy(new BigDecimal(0));
+            stu.setResidualSubsidyAmount(new BigDecimal(0));
         }
     }
 
