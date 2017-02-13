@@ -7,7 +7,7 @@
             <tr>
                 <td>姓名:<span>&nbsp;&nbsp;&nbsp;<#if student.name??>${student.name}<#else>未填写</#if></span></td>
                 <td>性别:<span>&nbsp;&nbsp;&nbsp;<#if student.sex??>${student.sex}<#else>未填写</#if></span></td>
-                <td>出生日期:<span>&nbsp;&nbsp;&nbsp;<#if student.birthday??>${student.birthday}<#else>未填写</#if></span></td>
+                <td>出生日期:<span>&nbsp;&nbsp;&nbsp;<#if student.birthday??>${(student.birthday)?number?number_to_date}<#else>未填写</#if></span></td>
                 <td rowspan="4" class="text-center" width="150px"><img class="carousel-inner img-responsive img-rounded" src="${staticServePath}\${(student.photoUrl)!}"/></td>
                 <#--http://imgsrc.baidu.com/baike/pic/item/f9198618367adab43246bfa18ed4b31c8601e4ba.jpg-->
             </tr>
@@ -42,7 +42,7 @@
                 <#--<td></td>-->
             <#--</tr>-->
             <td colspan="2"> 毕业学校:<span>&nbsp;&nbsp;&nbsp;<#if student.college??>${student.college}<#else>未填写</#if></span></td>
-            <td colspan="2">毕业时间:<span>&nbsp;&nbsp;&nbsp;<#if student.graduationTime??>${student.graduationTime}<#else>未填写</#if></span></td>
+            <td colspan="2">毕业时间:<span>&nbsp;&nbsp;&nbsp;<#if student.graduationTime??>${(student.graduationTime?number)?number_to_date}<#else>未填写</#if></span></td>
             </tr>
             <td colspan="4">身份证号:<span>&nbsp;&nbsp;&nbsp;<#if student.idNumber??>${student.idNumber}<#else>未填写</#if></span></td>
             </tr>
@@ -69,8 +69,8 @@
             <td colspan="2">银行卡号:<span>&nbsp;&nbsp;&nbsp;<#if student.bankCard??>${student.bankCard}<#else>未填写</#if></span></td>
             </tr>
             </tr>
-            <td colspan="2">首次还款日期:<span>&nbsp;&nbsp;&nbsp;<#if student.firstRepaymentTime??>${student.firstRepaymentTime}<#else>未填写</#if></span></td>
-            <td colspan="2">学生还款日期:<span>&nbsp;&nbsp;&nbsp;<#if student.studentRepaymentTime??>${student.studentRepaymentTime}<#else>未填写</#if></span></td>
+            <td colspan="2">首次还款日期:<span>&nbsp;&nbsp;&nbsp;<#if student.firstRepaymentTime??>${(student.firstRepaymentTime?number)?number_to_date}<#else>未填写</#if></span></td>
+            <td colspan="2">学生还款日期:<span>&nbsp;&nbsp;&nbsp;<#if student.studentRepaymentTime??>${(student.studentRepaymentTime?number)?number_to_date}<#else>未填写</#if></span></td>
             </tr>
             <tr>
                 <td>补助总金额:<span>&nbsp;&nbsp;&nbsp;<#if student.subsidy??>${student.subsidy}<#else>未填写</#if></span></td>
