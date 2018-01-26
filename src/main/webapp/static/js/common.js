@@ -1390,7 +1390,6 @@ var func = {
             list.each(function (index, dom) {
                 json[$(dom).attr('name')] = $(dom).val();
             })
-
             Util.ajax(Label.staticServePath + "/studentManager/updateStudentInfo", {
                 data: {
                     'list': json,
