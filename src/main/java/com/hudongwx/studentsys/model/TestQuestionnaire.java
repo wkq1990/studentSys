@@ -14,6 +14,15 @@ public class TestQuestionnaire extends BaseTestQuestionnaire<TestQuestionnaire> 
 	private Long testQuestionnaireEndTime;
     private Integer testQuestionnaireClassId;
     private Long testQuestionnaireTempTime;
+    private TestReply testReply;
+
+    public TestReply getTestReply() {
+        return testReply;
+    }
+
+    public void setTestReply(TestReply testReply) {
+        this.testReply = testReply;
+    }
 
     public Long getTestQuestionnaireEndTime() {
         return testQuestionnaireEndTime;

@@ -31,7 +31,7 @@ public class ExcelUtil {
         try {
             Workbook wb = Workbook.getWorkbook(file); // 从文件流中获取Excel工作区对象（WorkBook）
             Sheet sheet = wb.getSheet(0); // 从工作区中取得页（Sheet）
-            for (int i = 2; i < sheet.getRows(); i++) { // 循环打印Excel表中的内容
+            for (int i = 3; i < sheet.getRows(); i++) { // 循环打印Excel表中的内容
                 Student s = new Student();
                 for (int j = 0; j < sheet.getColumns(); j++) {
                     Cell cell = sheet.getCell(j, i);
@@ -51,6 +51,7 @@ public class ExcelUtil {
                                 bd = sdf.parse(cell.getContents());
                             } catch (Exception e) {
                                 s.setRemark("生日日期格式错误！");
+                                s.setBirthday(new Date().getTime());
                                 break;
                             }
                             s.setBirthday(bd.getTime());

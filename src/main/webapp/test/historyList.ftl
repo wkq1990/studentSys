@@ -17,6 +17,7 @@
                         <th>开始时间</th>
                         <th>结束时间</th>
                         <th>状态</th>
+                        <th>得分</th>
                         <th>操作</th>
                     </tr>
                     </thead>
@@ -26,13 +27,27 @@
                             <td>${q.testQuestionnaireTitle}</td>
                             <td>${((q.testQuestionnaireStartTime)?number)?number_to_datetime}</td>
                             <td>${((q.testQuestionnaireEndTime)?number)?number_to_datetime}</td>
-                            <td><#if (q.testQuestionnaireStartTime?number) < (nowTime?number) && (q.testQuestionnaireEndTime?number) gt (nowTime?number)>
-                                <span class="text-success">正在进行中</span>
-                            <#elseif (q.testQuestionnaireStartTime?number) gt (nowTime?number)>
-                                <span class="text-danger">尚未开始</span>
-                            <#else>
-                                <span class="text-gray">已完结</span>
-                            </#if>
+                            <td>
+                                <#if (q.testQuestionnaireStartTime?number) < (nowTime?number) && (q.testQuestionnaireEndTime?number) gt (nowTime?number)>
+                                    <span class="text-success">正在进行中</span>
+                                <#elseif (q.testQuestionnaireStartTime?number) gt (nowTime?number)>
+                                    <span class="text-danger">尚未开始</span>
+                                <#else>
+                                    <span class="text-gray">已完结</span>
+                                </#if>
+                            </td>
+                            <td>
+                                <#if (q.testQuestionnaireStartTime?number) < (nowTime?number) && (q.testQuestionnaireEndTime?number) gt (nowTime?number)>
+                                    <span class="text-danger">考试进行中</span>
+                                <#elseif (q.testQuestionnaireStartTime?number) gt (nowTime?number)>
+                                    <span class="text-gray">尚未进行考试</span>
+                                <#elseif (q.testQuestionnaireStartTime?number) < (nowTime?number) && (q.testQuestionnaireEndTime?number) lt (nowTime?number)&& (q.testReply.correcting)?? && (q.testReply.correcting)!=1>
+                                    <span class="text-danger">试卷尚未完成批改</span>
+                                <#elseif (q.testQuestionnaireStartTime?number) < (nowTime?number) && (q.testQuestionnaireEndTime?number) lt (nowTime?number)&& !(q.testReply.correcting)?exists>
+                                    <span class="text-danger">试卷未提交！！！</span>
+                                <#else>
+                                    <span class="text-success">${q.testReply.score}</span>
+                                </#if>
                             </td>
                             <td>
                                 <#if (q.testQuestionnaireEndTime?number) < (nowTime?number)>

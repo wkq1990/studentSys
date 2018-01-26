@@ -32,7 +32,7 @@
     </div>
     <div class="count" id="count">倒计时：<font id="count-down"></font></div>
     <div class="tip" id="postTip"></div>
-    <div class="container">
+    <div class="container" style="overflow: scroll">
         <div class="survey_title">
             <h1>${questionnaire.testQuestionnaireTitle}</h1>
         <#if questionnaire.testQuestionnaireMessage??>

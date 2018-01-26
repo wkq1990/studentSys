@@ -61,7 +61,7 @@
                                     <#--<textarea class="comment" rows="10" tabindex="4"
                                               placeholder="答案"></textarea>-->
 
-                                        <pre><p></p></pre>
+                                        <pre><p style="overflow: scroll"></p></pre>
                                     </#if>
                                 </div>
                                 <div class="col-md-6">

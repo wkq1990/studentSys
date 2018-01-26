@@ -113,6 +113,7 @@ public class StudentController extends BaseController {
                 aClass.setStudentCnt(cnt);
                 classService._updateClass(aClass);
             }
+            userService._deleteUser(userService.getUserByStuPhone(student));
             RenderKit.renderSuccess(this, "学生信息删除成功！");
         } else {
             RenderKit.renderError(this, "学生信息删除失败！");

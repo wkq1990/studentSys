@@ -49,7 +49,7 @@
         </a>
     </#list>
     </div>
-    <div>Copyright © 2014-2016 互动无限科技有限公司</div>
+    <div>Copyright © 2016-2017 华事达互联网科技有限公司</div>
 </div>
 </body>
 </html>

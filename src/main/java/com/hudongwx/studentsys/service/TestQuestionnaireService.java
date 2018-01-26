@@ -20,6 +20,7 @@ public class TestQuestionnaireService extends Service {
     private ClassService classService;
     private StudentService studentService;
     private TestQuestionnaireClassService testQuestionnaireClassService;
+    private TestReplyService testReplyService;
     public List<TestQuestionnaire> getAllTestQuestionnaire() {
         return TestQuestionnaire.dao.find(TestQuestionnaire.SEARCH_FROM_TEST_QUESTIONNAIRE);
     }
@@ -41,7 +42,7 @@ public class TestQuestionnaireService extends Service {
                 .collect(Collectors.toList());*/
     }
 
-    public Page<TestQuestionnaire> getQuestionnaireByClass(Integer currentPage, Class c){
+    public Page<TestQuestionnaire> getQuestionnaireByClass(Integer currentPage, Class c,Integer stuId){
         if(c == null)
             return Common.EMPTY_PAGE;
         Page<TestQuestionnaireClass> paginate = TestQuestionnaireClass.dao
@@ -49,6 +50,10 @@ public class TestQuestionnaireService extends Service {
         List<TestQuestionnaire> collect = paginate.getList()
                 .stream().map(this::packingQuestionnaire)
                 .collect(Collectors.toList());
+        collect.stream().map(tq ->{
+            tq.setTestReply(testReplyService.getReply(tq.getTestQuestionnaireClassId(),stuId,false));
+            return tq;
+        }).collect(Collectors.toList());
         return PageinateKit.ClonePage(paginate,collect);
     }
 
@@ -60,7 +65,7 @@ public class TestQuestionnaireService extends Service {
     public Page<TestQuestionnaire> getQuestionnaireByStudent(Integer currentPage,Student student) {
         if (student == null)
             return Common.EMPTY_PAGE;
-        return getQuestionnaireByClass(currentPage,classService.getClassByStudent(student));
+        return getQuestionnaireByClass(currentPage,classService.getClassByStudent(student),student.getId());
     }
     public List<TestQuestionnaire> getQuestionnairesByUser(User user) {
         return getQuestionnaireByStudent(studentService.getStudentByUser(user));
